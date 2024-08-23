@@ -1,13 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ edit update destroy ]
 
   # GET /posts
   def index
     @posts = Post.all
-  end
-
-  # GET /posts/1
-  def show
   end
 
   # GET /posts/new
