@@ -12,7 +12,6 @@
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
   </div>
-  <div>
-    <%= form.submit form.object.persisted? ? '更新' : '登録' %>
-  </div>
+  <div><%= form.submit form.object.persisted? ? '更新' : '登録' %></div>
+  <div><%= button_tag "閉じる", type: "button", data: { action: "modals#calcel" } %></div>
 <% end %>
