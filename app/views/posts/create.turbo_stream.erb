@@ -1,4 +1,4 @@
-<%= turbo_stream.update "flash", partial: "shared/flash" %>
+<%= turbo_stream_update_flash %>
 <% if !@post.errors.any? %>
   <%= turbo_stream.append "posts", partial: "posts/post", locals: {post: @post} %>  
 <% end %>
