@@ -1,0 +1,4 @@
+<%= turbo_stream_update_flash %>
+<% if !@post.errors.any? %>
+  <%= turbo_stream.remove @post %>
+<% end %>

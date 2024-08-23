@@ -1,13 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ edit update destroy ]
+  before_action :redirect_to_index, only: %i[ new edit ]
 
   # GET /posts
   def index
     @posts = Post.all
-  end
-
-  # GET /posts/1
-  def show
   end
 
   # GET /posts/new
@@ -24,7 +21,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: "Post was successfully created."
+      flash.now[:notice] = "#{@post.id}の新規作成に成功"
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +30,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: "Post was successfully updated.", status: :see_other
+      flash.now[:notice] = "#{@post.id}の更新に成功"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,8 +38,12 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    @post.destroy!
-    redirect_to posts_url, notice: "Post was successfully destroyed.", status: :see_other
+    if @post.destroy
+      flash.now[:notice] = "#{@post.id}の削除に成功"
+    else
+      flash.now[:alert] = "#{@post.id}の削除に失敗"
+    end
+
   end
 
   private
@@ -54,5 +55,11 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title)
+    end
+
+    def redirect_to_index
+      if !request.format.turbo_stream? && !turbo_frame_request?
+        redirect_to posts_url
+      end
     end
 end

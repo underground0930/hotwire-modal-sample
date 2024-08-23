@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+ body{
+  padding:40px;
+ }
+
+ .modal{
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);  
+  width: 300px;
+  height: 300px;
+  background-color: #fff;
+}
+
+.notice{
+  color: green;
+}
+
+.alert{
+  color: red;
+}
+
