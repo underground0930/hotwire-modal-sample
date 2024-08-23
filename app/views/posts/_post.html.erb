@@ -1,7 +1,10 @@
-<div id="<%= dom_id post %>">
+<div id="<%= dom_id post %>" style="border:1px solid #ccc;">
   <p>
-    <strong>Title:</strong>
-    <%= post.title %>
+    <strong>Id:</strong><%= post.id %><br>
+    <strong>Title:</strong><%= post.title %>
   </p>
-
+  <p>
+    <%= link_to "編集する", edit_post_path(post), data: { turbo_frame: "modal" } %>
+    <%= link_to "削除する", post, data: { turbo_method: :delete, turbo_confirm: "#{post.id}を削除してもいいですか？" } %>
+  </p>
 </div>
