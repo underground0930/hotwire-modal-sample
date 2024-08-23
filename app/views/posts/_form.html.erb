@@ -1,4 +1,4 @@
-<%= form_with(model: post) do |form| %>
+<%= form_with(model: post, data:{ action: "turbo:submit-end->modals#submitEnd" }) do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <ul>
@@ -13,5 +13,5 @@
     <%= form.text_field :title %>
   </div>
   <div><%= form.submit form.object.persisted? ? '更新' : '登録' %></div>
-  <div><%= button_tag "閉じる", type: "button", data: { action: "modals#calcel" } %></div>
+  <div><%= button_tag "閉じる", type: "button", data: { action: "modals#closeModal" } %></div>
 <% end %>
